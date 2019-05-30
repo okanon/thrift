@@ -20,7 +20,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{3FEBB752-2288-45CC-AAF8-7802D7438CE3}</ProjectGuid>
+    <ProjectGuid>{3E94FE78-A74B-4AA6-A8A5-A0CCD888824C}</ProjectGuid>
     <RootNamespace>libthrift</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -56,10 +56,18 @@
   </ImportGroup>
   <ImportGroup Label="Shared">
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -69,7 +77,6 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(BOOST_INCLUDE_DIRECTORY);$(ProjectDir)src</AdditionalIncludeDirectories>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -79,7 +86,6 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(BOOST_INCLUDE_DIRECTORY);$(ProjectDir)src</AdditionalIncludeDirectories>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -91,7 +97,6 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(BOOST_INCLUDE_DIRECTORY);$(ProjectDir)src</AdditionalIncludeDirectories>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -107,7 +112,6 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(BOOST_INCLUDE_DIRECTORY);$(ProjectDir)src</AdditionalIncludeDirectories>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -115,15 +119,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="src\thrift\protocol\TBinaryProtocol.tcc" />
+    <None Include="src\thrift\protocol\TCompactProtocol.tcc" />
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="src\thrift\async\TAsyncChannel.cpp" />
     <ClCompile Include="src\thrift\async\TConcurrentClientSyncInfo.cpp" />
     <ClCompile Include="src\thrift\concurrency\BoostMonitor.cpp" />
     <ClCompile Include="src\thrift\concurrency\BoostMutex.cpp" />
     <ClCompile Include="src\thrift\concurrency\BoostThreadFactory.cpp" />
     <ClCompile Include="src\thrift\concurrency\StdThreadFactory.cpp" />
+    <ClCompile Include="src\thrift\concurrency\ThreadManager.cpp" />
+    <ClCompile Include="src\thrift\concurrency\TimerManager.cpp" />
     <ClCompile Include="src\thrift\concurrency\Util.cpp" />
     <ClCompile Include="src\thrift\processor\PeekProcessor.cpp" />
     <ClCompile Include="src\thrift\protocol\TBase64Utils.cpp" />
+    <ClCompile Include="src\thrift\protocol\TDebugProtocol.cpp" />
+    <ClCompile Include="src\thrift\protocol\THeaderProtocol.cpp" />
     <ClCompile Include="src\thrift\protocol\TJSONProtocol.cpp" />
     <ClCompile Include="src\thrift\protocol\TMultiplexedProtocol.cpp" />
     <ClCompile Include="src\thrift\protocol\TProtocol.cpp" />
@@ -144,23 +157,21 @@
     <ClCompile Include="src\thrift\transport\TPipe.cpp" />
     <ClCompile Include="src\thrift\transport\TPipeServer.cpp" />
     <ClCompile Include="src\thrift\transport\TServerSocket.cpp" />
+    <ClCompile Include="src\thrift\transport\TSimpleFileTransport.cpp" />
     <ClCompile Include="src\thrift\transport\TSocket.cpp" />
+    <ClCompile Include="src\thrift\transport\TSocketPool.cpp" />
     <ClCompile Include="src\thrift\transport\TSSLServerSocket.cpp" />
     <ClCompile Include="src\thrift\transport\TSSLSocket.cpp" />
     <ClCompile Include="src\thrift\transport\TTransportException.cpp" />
     <ClCompile Include="src\thrift\transport\TTransportUtils.cpp" />
-    <ClCompile Include="src\thrift\windows\GetTimeOfDay.cpp" />
-    <ClCompile Include="src\thrift\windows\SocketPair.cpp" />
-    <ClCompile Include="src\thrift\windows\TWinsockSingleton.cpp" />
-    <ClCompile Include="src\thrift\windows\WinFcntl.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\thrift\async\TAsyncChannel.h" />
     <ClInclude Include="src\thrift\async\TConcurrentClientSyncInfo.h" />
     <ClInclude Include="src\thrift\concurrency\BoostThreadFactory.h" />
-    <ClInclude Include="src\thrift\concurrency\Exception.h" />
-    <ClInclude Include="src\thrift\concurrency\PlatformThreadFactory.h" />
     <ClInclude Include="src\thrift\concurrency\StdThreadFactory.h" />
+    <ClInclude Include="src\thrift\concurrency\ThreadManager.h" />
+    <ClInclude Include="src\thrift\concurrency\TimerManager.h" />
     <ClInclude Include="src\thrift\concurrency\Util.h" />
     <ClInclude Include="src\thrift\processor\PeekProcessor.h" />
     <ClInclude Include="src\thrift\processor\StatsProcessor.h" />
@@ -168,9 +179,15 @@
     <ClInclude Include="src\thrift\protocol\TBase64Utils.h" />
     <ClInclude Include="src\thrift\protocol\TBinaryProtocol.h" />
     <ClInclude Include="src\thrift\protocol\TCompactProtocol.h" />
+    <ClInclude Include="src\thrift\protocol\TDebugProtocol.h" />
+    <ClInclude Include="src\thrift\protocol\THeaderProtocol.h" />
     <ClInclude Include="src\thrift\protocol\TJSONProtocol.h" />
     <ClInclude Include="src\thrift\protocol\TMultiplexedProtocol.h" />
     <ClInclude Include="src\thrift\protocol\TProtocol.h" />
+    <ClInclude Include="src\thrift\protocol\TProtocolDecorator.h" />
+    <ClInclude Include="src\thrift\protocol\TProtocolException.h" />
+    <ClInclude Include="src\thrift\protocol\TProtocolTap.h" />
+    <ClInclude Include="src\thrift\protocol\TProtocolTypes.h" />
     <ClInclude Include="src\thrift\protocol\TVirtualProtocol.h" />
     <ClInclude Include="src\thrift\server\TConnectedClient.h" />
     <ClInclude Include="src\thrift\server\TServer.h" />
@@ -182,6 +199,7 @@
     <ClInclude Include="src\thrift\Thrift.h" />
     <ClInclude Include="src\thrift\TOutput.h" />
     <ClInclude Include="src\thrift\TProcessor.h" />
+    <ClInclude Include="src\thrift\transport\PlatformSocket.h" />
     <ClInclude Include="src\thrift\transport\TBufferTransports.h" />
     <ClInclude Include="src\thrift\transport\TFDTransport.h" />
     <ClInclude Include="src\thrift\transport\TFileTransport.h" />
@@ -192,7 +210,10 @@
     <ClInclude Include="src\thrift\transport\TPipeServer.h" />
     <ClInclude Include="src\thrift\transport\TServerSocket.h" />
     <ClInclude Include="src\thrift\transport\TServerTransport.h" />
+    <ClInclude Include="src\thrift\transport\TShortReadTransport.h" />
+    <ClInclude Include="src\thrift\transport\TSimpleFileTransport.h" />
     <ClInclude Include="src\thrift\transport\TSocket.h" />
+    <ClInclude Include="src\thrift\transport\TSocketPool.h" />
     <ClInclude Include="src\thrift\transport\TSSLServerSocket.h" />
     <ClInclude Include="src\thrift\transport\TSSLSocket.h" />
     <ClInclude Include="src\thrift\transport\TTransport.h" />
@@ -200,16 +221,6 @@
     <ClInclude Include="src\thrift\transport\TTransportUtils.h" />
     <ClInclude Include="src\thrift\transport\TVirtualTransport.h" />
     <ClInclude Include="src\thrift\windows\config.h" />
-    <ClInclude Include="src\thrift\windows\GetTimeOfDay.h" />
-    <ClInclude Include="src\thrift\windows\Operators.h" />
-    <ClInclude Include="src\thrift\windows\SocketPair.h" />
-    <ClInclude Include="src\thrift\windows\TWinsockSingleton.h" />
-    <ClInclude Include="src\thrift\windows\WinFcntl.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-    <None Include="src\thrift\protocol\TBinaryProtocol.tcc" />
-    <None Include="src\thrift\protocol\TCompactProtocol.tcc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,5 +1,5 @@
 # Thrift
-Apache Thrift 0.11.0 (C++)
+Apache Thrift 0.12.0 (C++)
 
 ## Build
 require boost >= 1.53.0, openssl = 1.1.0, libevent

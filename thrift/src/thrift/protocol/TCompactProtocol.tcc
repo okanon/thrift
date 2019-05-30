@@ -21,7 +21,6 @@
 
 #include <limits>
 
-
 #ifndef _Win32
 #include "thrift/windows/config.h"
 #else

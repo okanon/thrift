@@ -73,7 +73,7 @@
 #define HAVE_GETTIMEOFDAY 1
 #define HAVE_SYS_STAT_H 1
 
-#define PACKAGE_VERSION "0.11.0"
+#define PACKAGE_VERSION "0.12.0"
 
 // Must be using VS2010 or later, or boost, so that C99 types are defined in the global namespace
 #ifdef HAVE_STDINT_H
